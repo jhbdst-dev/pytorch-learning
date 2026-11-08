@@ -1,12 +1,13 @@
-import torch
+from torch.utils.data import Dataset
 
-a = [[1], [2], [3], [4], [5]]
-x = torch.tensor(a, dtype=torch.float32)
 
-y = 2 * x
+class MyDataset(Dataset):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
-assert x.shape == y.shape
-assert x.dtype == torch.float32
-assert y.dtype == torch.float32
+    def __len__(self):
+        return len(self.x)
 
-assert torch.equal(x * 2, y)
+    def __getitem__(self, index):
+        return self.x[index], self.y[index]
